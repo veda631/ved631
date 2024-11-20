@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background YouTube Player</title>
+</head>
+<body>
+    <h1>Background YouTube Player</h1>
+    <input type="text" id="videoID" placeholder="Enter YouTube Video Link">
+    <button `` onresize="player" onclick="playVideo()">Play</button>
+    <div id="player"></div>
+
+    <script>
+        // YouTube Iframe API ko load karna
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0', // 0 height to hide
+                width: '0',  // 0 width to hide
+                videoId: '',
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        function playVideo() {
+            var videoID = document.getElementById("videoID").value;
+            player.loadVideoById(videoID);
+        }
+    </script>
+    <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDtr2dI4jsShx_Ans2hnmGuFiJuc10kzhM",
+    authDomain: "vedansh-2004.firebaseapp.com",
+    projectId: "vedansh-2004",
+    storageBucket: "vedansh-2004.firebasestorage.app",
+    messagingSenderId: "689083414258",
+    appId: "1:689083414258:web:cfc5eed01ea1dd5225c26b",
+    measurementId: "G-V78HDZW7N5"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+</body>
+</html>
